@@ -1,0 +1,25 @@
+main {
+  text-align: center;
+}
+.cat-image {
+  width: 220px;
+  display: block;
+  margin: 30px auto;
+}
+
+body {
+  background-color: #f5ffe8;
+  font-family: sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: 48px;
+  color: #ff7b7b;
+  margin-bottom: 5px;
+}
+.subtitle {
+  color: gray;
+  margin-top: 0;
+  margin-bottom: 30px;
+}
