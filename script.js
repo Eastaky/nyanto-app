@@ -25,3 +25,6 @@ changeButton.addEventListener("click", function () {
 });
 
 const savedDate = localStorage.getItem("lastChangeDate");
+if (savedDate) {
+  lastDate.textContent = savedDate;
+}
