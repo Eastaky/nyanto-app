@@ -21,4 +21,7 @@ const changeButton = document.getElementById("changeButton");
 
 changeButton.addEventListener("click", function () {
   lastDate.textContent = formattedDate;
+  localStorage.setItem("lastChangeDate", formattedDate);
 });
+
+const savedDate = localStorage.getItem("lastChangeDate");
