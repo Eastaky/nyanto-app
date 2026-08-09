@@ -27,4 +27,21 @@ changeButton.addEventListener("click", function () {
 const savedDate = localStorage.getItem("lastChangeDate");
 if (savedDate) {
   lastDate.textContent = savedDate;
+  const daysPassed = document.getElementById("daysPassed");
+  const lastChange = new Date(savedDate);
+  const difference = today - lastChange;
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const testDays = 3;
+  if (testDays <= 2) {
+    console.log("きれい");
+    catWorld.classList.add("clean");
+  } else if (testDays <= 6) {
+    console.log("少しよどんでいる");
+    catWorld.classList.add("warning");
+  } else {
+    console.log("交換時期！");
+    catWorld.classList.add("danger");
+  }
 }
+daysPassed.textContent = `${days}日経過`;
+const catWorld = document.getElementById("catWorld");
