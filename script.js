@@ -18,24 +18,33 @@ const lastDate = document.getElementById("lastDate");
 lastDate.textContent = formattedDate;
 
 const changeButton = document.getElementById("changeButton");
+const daysPassed = document.getElementById("daysPassed");
 
 changeButton.addEventListener("click", function () {
   lastDate.textContent = formattedDate;
   localStorage.setItem("lastChangeDate", formattedDate);
+  lastDate.textContent = formattedDate;
+  daysPassed.textContent = "0日経過";
+  updateCatWorld(0);
 });
 
 const savedDate = localStorage.getItem("lastChangeDate");
+const catWorld = document.getElementById("catWorld");
 if (savedDate) {
   lastDate.textContent = savedDate;
-  const daysPassed = document.getElementById("daysPassed");
   const lastChange = new Date(savedDate);
   const difference = today - lastChange;
   const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const testDays = 3;
-  if (testDays <= 2) {
+  updateCatWorld(days);
+}
+daysPassed.textContent = `${days}日経過`;
+
+function updateCatWorld(days) {
+  catWorld.classList.remove("clean", "warning", "danger");
+  if (days <= 2) {
     console.log("きれい");
     catWorld.classList.add("clean");
-  } else if (testDays <= 6) {
+  } else if (days <= 6) {
     console.log("少しよどんでいる");
     catWorld.classList.add("warning");
   } else {
@@ -43,5 +52,3 @@ if (savedDate) {
     catWorld.classList.add("danger");
   }
 }
-daysPassed.textContent = `${days}日経過`;
-const catWorld = document.getElementById("catWorld");
