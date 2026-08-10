@@ -17,6 +17,9 @@ const lastDate = document.getElementById("lastDate");
 
 lastDate.textContent = formattedDate;
 
+const sevenDaysButton = document.getElementById("sevenDaysButton");
+const fourteenDaysButton = document.getElementById("fourteenDaysButton");
+
 const changeButton = document.getElementById("changeButton");
 const daysPassed = document.getElementById("daysPassed");
 
@@ -52,3 +55,7 @@ function updateCatWorld(days) {
     catWorld.classList.add("danger");
   }
 }
+
+sevenDaysButton.addEventListener("click", function () {
+  localStorage.setItem("cycle", 7);
+});
