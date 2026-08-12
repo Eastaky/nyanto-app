@@ -39,8 +39,8 @@ if (savedDate) {
   const difference = today - lastChange;
   const days = Math.floor(difference / (1000 * 60 * 60 * 24));
   updateCatWorld(days);
+  daysPassed.textContent = `${days}日経過`;
 }
-daysPassed.textContent = `${days}日経過`;
 
 function updateCatWorld(days) {
   catWorld.classList.remove("clean", "warning", "danger");
@@ -59,3 +59,10 @@ function updateCatWorld(days) {
 sevenDaysButton.addEventListener("click", function () {
   localStorage.setItem("cycle", 7);
 });
+
+fourteenDaysButton.addEventListener("click", function () {
+  localStorage.setItem("cycle", 14);
+});
+const savedCycle = localStorage.getItem("cycle");
+
+console.log(savedCycle);
