@@ -63,10 +63,12 @@ function updateCatWorld(days, cycle) {
 
 sevenDaysButton.addEventListener("click", function () {
   localStorage.setItem("cycle", 7);
+  updateCatWorld(days, 7);
 });
 
 fourteenDaysButton.addEventListener("click", function () {
   localStorage.setItem("cycle", 14);
+  updateCatWorld(days, 14);
 });
 
 console.log(cycle);
