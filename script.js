@@ -22,8 +22,16 @@ const fourteenDaysButton = document.getElementById("fourteenDaysButton");
 
 const changeButton = document.getElementById("changeButton");
 const daysPassed = document.getElementById("daysPassed");
+
 const savedCycle = localStorage.getItem("cycle");
+if (savedCycle === "7") {
+  sevenDaysButton.classList.add("selected");
+} else if (savedCycle === "14") {
+  fourteenDaysButton.classList.add("selected");
+}
+
 const cycle = Number(savedCycle);
+let days = 0;
 
 changeButton.addEventListener("click", function () {
   lastDate.textContent = formattedDate;
@@ -39,7 +47,7 @@ if (savedDate) {
   lastDate.textContent = savedDate;
   const lastChange = new Date(savedDate);
   const difference = today - lastChange;
-  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  days = Math.floor(difference / (1000 * 60 * 60 * 24));
   const testDays = 4;
   updateCatWorld(days, cycle);
   daysPassed.textContent = `${days}日経過`;
@@ -64,11 +72,15 @@ function updateCatWorld(days, cycle) {
 sevenDaysButton.addEventListener("click", function () {
   localStorage.setItem("cycle", 7);
   updateCatWorld(days, 7);
+  sevenDaysButton.classList.add("selected");
+  fourteenDaysButton.classList.remove("selected");
 });
 
 fourteenDaysButton.addEventListener("click", function () {
   localStorage.setItem("cycle", 14);
   updateCatWorld(days, 14);
+  fourteenDaysButton.classList.add("selected");
+  sevenDaysButton.classList.remove("selected");
 });
 
 console.log(cycle);
