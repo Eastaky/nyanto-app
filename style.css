@@ -35,4 +35,5 @@ h1 {
 
 .cycle-button.selected {
   font-weight: bold;
+  background-color: #ffb6b6;
 }
