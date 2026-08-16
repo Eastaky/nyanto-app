@@ -22,6 +22,7 @@ const fourteenDaysButton = document.getElementById("fourteenDaysButton");
 
 const changeButton = document.getElementById("changeButton");
 const daysPassed = document.getElementById("daysPassed");
+const remainingDays = document.getElementById("remainingDays");
 
 const savedCycle = localStorage.getItem("cycle");
 if (savedCycle === "7") {
@@ -38,6 +39,7 @@ changeButton.addEventListener("click", function () {
   localStorage.setItem("lastChangeDate", formattedDate);
   lastDate.textContent = formattedDate;
   daysPassed.textContent = "0日経過";
+  remainingDays.textContent = `次の交換まであと${cycle}日`;
   updateCatWorld(0, cycle);
 });
 
@@ -48,6 +50,17 @@ if (savedDate) {
   const lastChange = new Date(savedDate);
   const difference = today - lastChange;
   days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const remaining = cycle - days;
+
+  if (remaining === 0) {
+    remainingDays.textContent = "今日が交換日です！";
+  } else if (remaining < 0) {
+    const overdueDays = Math.abs(remaining);
+    remainingDays.textContent = `交換時期を${overdueDays}日過ぎています！`;
+  } else {
+    remainingDays.textContent = `次の交換まであと${remaining}日`;
+  }
+
   const testDays = 4;
   updateCatWorld(days, cycle);
   daysPassed.textContent = `${days}日経過`;
@@ -74,6 +87,7 @@ sevenDaysButton.addEventListener("click", function () {
   updateCatWorld(days, 7);
   sevenDaysButton.classList.add("selected");
   fourteenDaysButton.classList.remove("selected");
+  updateRemainingDays(days, 7);
 });
 
 fourteenDaysButton.addEventListener("click", function () {
@@ -81,8 +95,21 @@ fourteenDaysButton.addEventListener("click", function () {
   updateCatWorld(days, 14);
   fourteenDaysButton.classList.add("selected");
   sevenDaysButton.classList.remove("selected");
+  updateRemainingDays(days, 14);
 });
 
 console.log(cycle);
 
 console.log(savedCycle);
+
+function updateRemainingDays(days, cycle) {
+  const remaining = cycle - days;
+  if (remaining === 0) {
+    remainingDays.textContent = "今日が交換日です！";
+  } else if (remaining < 0) {
+    const overdueDays = Math.abs(remaining);
+    remainingDays.textContent = `交換時期を${overdueDays}日過ぎています！`;
+  } else {
+    remainingDays.textContent = `次の交換まであと${remaining}日`;
+  }
+}
