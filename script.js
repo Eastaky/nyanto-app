@@ -39,7 +39,7 @@ changeButton.addEventListener("click", function () {
   localStorage.setItem("lastChangeDate", formattedDate);
   lastDate.textContent = formattedDate;
   daysPassed.textContent = "0日経過";
-  remainingDays.textContent = `次の交換まであと${cycle}日`;
+  updateRemainingDays(0, cycle);
   updateCatWorld(0, cycle);
 });
 
@@ -50,17 +50,7 @@ if (savedDate) {
   const lastChange = new Date(savedDate);
   const difference = today - lastChange;
   days = Math.floor(difference / (1000 * 60 * 60 * 24));
-  const remaining = cycle - days;
-
-  if (remaining === 0) {
-    remainingDays.textContent = "今日が交換日です！";
-  } else if (remaining < 0) {
-    const overdueDays = Math.abs(remaining);
-    remainingDays.textContent = `交換時期を${overdueDays}日過ぎています！`;
-  } else {
-    remainingDays.textContent = `次の交換まであと${remaining}日`;
-  }
-
+  updateRemainingDays(days, cycle);
   const testDays = 4;
   updateCatWorld(days, cycle);
   daysPassed.textContent = `${days}日経過`;
