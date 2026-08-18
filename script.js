@@ -29,9 +29,11 @@ if (savedCycle === "7") {
   sevenDaysButton.classList.add("selected");
 } else if (savedCycle === "14") {
   fourteenDaysButton.classList.add("selected");
+} else {
+  sevenDaysButton.classList.add("selected");
 }
 
-const cycle = Number(savedCycle);
+let cycle = savedCycle ? Number(savedCycle) : 7;
 let days = 0;
 
 changeButton.addEventListener("click", function () {
@@ -54,6 +56,10 @@ if (savedDate) {
   const testDays = 4;
   updateCatWorld(days, cycle);
   daysPassed.textContent = `${days}日経過`;
+} else {
+  lastDate.textContent = "まだ登録されていません";
+  daysPassed.textContent = "--日経過";
+  remainingDays.textContent = "交換日を登録してください";
 }
 
 function updateCatWorld(days, cycle) {
@@ -72,7 +78,9 @@ function updateCatWorld(days, cycle) {
   }
 }
 
+//7日ボタン
 sevenDaysButton.addEventListener("click", function () {
+  cycle = 7;
   localStorage.setItem("cycle", 7);
   updateCatWorld(days, 7);
   sevenDaysButton.classList.add("selected");
@@ -80,7 +88,9 @@ sevenDaysButton.addEventListener("click", function () {
   updateRemainingDays(days, 7);
 });
 
+//14日ボタン
 fourteenDaysButton.addEventListener("click", function () {
+  cycle = 14;
   localStorage.setItem("cycle", 14);
   updateCatWorld(days, 14);
   fourteenDaysButton.classList.add("selected");
