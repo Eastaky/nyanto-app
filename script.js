@@ -80,22 +80,12 @@ function updateCatWorld(days, cycle) {
 
 //7日ボタン
 sevenDaysButton.addEventListener("click", function () {
-  cycle = 7;
-  localStorage.setItem("cycle", 7);
-  updateCatWorld(days, 7);
-  sevenDaysButton.classList.add("selected");
-  fourteenDaysButton.classList.remove("selected");
-  updateRemainingDays(days, 7);
+  setCycle(7);
 });
 
 //14日ボタン
 fourteenDaysButton.addEventListener("click", function () {
-  cycle = 14;
-  localStorage.setItem("cycle", 14);
-  updateCatWorld(days, 14);
-  fourteenDaysButton.classList.add("selected");
-  sevenDaysButton.classList.remove("selected");
-  updateRemainingDays(days, 14);
+  setCycle(14);
 });
 
 console.log(cycle);
@@ -111,5 +101,19 @@ function updateRemainingDays(days, cycle) {
     remainingDays.textContent = `交換時期を${overdueDays}日過ぎています！`;
   } else {
     remainingDays.textContent = `次の交換まであと${remaining}日`;
+  }
+}
+
+function setCycle(newCycle) {
+  cycle = newCycle;
+  localStorage.setItem("cycle", newCycle);
+  updateCatWorld(days, newCycle);
+  updateRemainingDays(days, newCycle);
+  if (newCycle === 7) {
+    sevenDaysButton.classList.add("selected");
+    fourteenDaysButton.classList.remove("selected");
+  } else {
+    fourteenDaysButton.classList.add("selected");
+    sevenDaysButton.classList.remove("selected");
   }
 }
