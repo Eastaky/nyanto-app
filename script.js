@@ -1,41 +1,35 @@
 const today = new Date();
-console.log(today);
 
 const year = today.getFullYear();
-console.log(year);
 
 const month = today.getMonth() + 1;
-console.log(month);
 
 const day = today.getDate();
-console.log(day);
 
 const formattedDate = `${year}/${month}/${day}`;
-console.log(formattedDate);
 
+//HTML要素を取得
+const changeButton = document.getElementById("changeButton");
 const lastDate = document.getElementById("lastDate");
+const daysPassed = document.getElementById("daysPassed");
+const remainingDays = document.getElementById("remainingDays");
 
 lastDate.textContent = formattedDate;
 
 const sevenDaysButton = document.getElementById("sevenDaysButton");
 const fourteenDaysButton = document.getElementById("fourteenDaysButton");
 
-const changeButton = document.getElementById("changeButton");
-const daysPassed = document.getElementById("daysPassed");
-const remainingDays = document.getElementById("remainingDays");
-
 const savedCycle = localStorage.getItem("cycle");
-if (savedCycle === "7") {
+let cycle = savedCycle ? Number(savedCycle) : 7;
+if (cycle === 7) {
   sevenDaysButton.classList.add("selected");
-} else if (savedCycle === "14") {
-  fourteenDaysButton.classList.add("selected");
 } else {
-  sevenDaysButton.classList.add("selected");
+  fourteenDaysButton.classList.add("selected");
 }
 
-let cycle = savedCycle ? Number(savedCycle) : 7;
 let days = 0;
 
+//シーツを交換したときの処理
 changeButton.addEventListener("click", function () {
   lastDate.textContent = formattedDate;
   localStorage.setItem("lastChangeDate", formattedDate);
@@ -62,22 +56,6 @@ if (savedDate) {
   remainingDays.textContent = "交換日を登録してください";
 }
 
-function updateCatWorld(days, cycle) {
-  catWorld.classList.remove("clean", "warning", "danger");
-
-  if (days >= cycle) {
-    console.log("交換時期！");
-    catWorld.classList.add("danger");
-  } else if (days >= cycle / 2) {
-    console.log("少しよどんでいる");
-
-    catWorld.classList.add("warning");
-  } else {
-    console.log("きれい");
-    catWorld.classList.add("clean");
-  }
-}
-
 //7日ボタン
 sevenDaysButton.addEventListener("click", function () {
   setCycle(7);
@@ -88,9 +66,18 @@ fourteenDaysButton.addEventListener("click", function () {
   setCycle(14);
 });
 
-console.log(cycle);
+// 画面表示を更新する関数
+function updateCatWorld(days, cycle) {
+  catWorld.classList.remove("clean", "warning", "danger");
 
-console.log(savedCycle);
+  if (days >= cycle) {
+    catWorld.classList.add("danger");
+  } else if (days >= cycle / 2) {
+    catWorld.classList.add("warning");
+  } else {
+    catWorld.classList.add("clean");
+  }
+}
 
 function updateRemainingDays(days, cycle) {
   const remaining = cycle - days;
