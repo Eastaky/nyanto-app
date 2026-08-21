@@ -9,6 +9,8 @@ const day = today.getDate();
 const formattedDate = `${year}/${month}/${day}`;
 
 //HTML要素を取得
+const catMessage = document.getElementById("catMessage");
+const catImage = document.getElementById("catImage");
 const changeButton = document.getElementById("changeButton");
 const lastDate = document.getElementById("lastDate");
 const daysPassed = document.getElementById("daysPassed");
@@ -72,10 +74,16 @@ function updateCatWorld(days, cycle) {
 
   if (days >= cycle) {
     catWorld.classList.add("danger");
+    catImage.src = "images/cat-danger.png";
+    catMessage.textContent = "汚いにゃ...";
   } else if (days >= cycle / 2) {
     catWorld.classList.add("warning");
+    catImage.src = "images/cat-warning.png";
+    catMessage.textContent = "そろそろ交換してほしいにゃ…";
   } else {
     catWorld.classList.add("clean");
+    catImage.src = "images/cat-clean.png";
+    catMessage.textContent = "快適だにゃ";
   }
 }
 
